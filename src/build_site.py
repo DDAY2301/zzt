@@ -21,7 +21,7 @@ PHOTOS={
  'ankaran': {'src':'https://commons.wikimedia.org/wiki/Special:FilePath/Ankaran_(13470221084).jpg?width=1200','file':'Ankaran (13470221084).jpg','name':'Debeli rtič pri Ankaranu','author':'Andrea Skerlavaj','licence':'CC BY-SA 2.0','url':'https://commons.wikimedia.org/wiki/File:Ankaran_(13470221084).jpg'},
 }
 # The Koper image is deliberately not displayed: its rights were not sufficiently cross-checked.
-NAV=[('','Domov'),('o-zavodu','O zavodu'),('raziskave-in-razvoj','Raziskave in razvoj'),('izobrazevanje-in-mladi','Izobraževanje in mladi'),('projekti','Projekti'),('ekipa-in-izkusnje','Ekipa in izkušnje'),('sodelovanje','Sodelovanje'),('publikacije-in-objave','Publikacije in objave'),('kontakt','Kontakt')]
+NAV=[('','Domov'),('o-zavodu','O zavodu'),('raziskave-in-razvoj','Raziskave in razvoj'),('izobrazevanje-in-mladi','Izobraževanje in mladi'),('projekti','Raziskovalne smeri'),('ekipa-in-izkusnje','Ekipa in izkušnje'),('sodelovanje','Sodelovanje'),('publikacije-in-objave','Publikacije in objave'),('kontakt','Kontakt')]
 
 AREAS=[
  dict(title='Okolje in primerljivi podatki',tag='Okoljske raziskave',photo='izola',link='raziskave-in-razvoj',question='Kako se opaženi odpadki razlikujejo med obalnimi lokacijami?',hypothesis='Na opaženo količino in sestavo lahko vplivajo dostopnost, raba prostora in čas opazovanja. To je hipoteza, ne ugotovitev.',method='Predvideni so ponovljivi popisi enako dolgih odsekov, enotne kategorije in zapis okoliščin.',source='JRC: spremljanje morskih odpadkov',source_url='https://publications.jrc.ec.europa.eu/repository/handle/JRC133594'),
@@ -74,14 +74,8 @@ def education():
  <section class="section olive-section"><div class="wrap two-col">{band('Izkušnje')}<div><h2>Gradimo na dokazljivem delu.</h2><p>Ustanovitelj ima osebne izkušnje z Erasmus+ usposabljanji, mednarodnimi mladinskimi izmenjavami in dokumentiranjem rezultatov projektov DCYDE. Te izkušnje niso prikazane kot že izvedeni projekti ZZT.</p>{link('ekipa-in-izkusnje','O izvajalski ekipi <span aria-hidden="true">↗</span>','text-link')}</div></div></section>'''
 
 def projects():
- cards=''.join(f'<article class="project-card"><div class="project-card-meta"><span>{escape(p["tag"])}</span><span>{p["year"]}</span></div><p class="status">{escape(p["status"])}</p><h2>{link("projekti/"+p["slug"],escape(p["title"]))}</h2><p>{escape(p["intro"])}</p>{link("projekti/"+p["slug"],"O projektu <span aria-hidden=\"true\">↗</span>","text-link")}</article>' for p in PROJ)
- return hero('Projekti / registrirano stanje','Pripravljamo delo, ki bo <em>preverljivo.</em>','Projektni koncept ni isto kot odobrena sredstva, izveden projekt ali znanstvena objava.')+f'<section class="section"><div class="wrap project-grid">{cards}</div></section><section class="section cream-section"><div class="wrap two-col">{band("Načelo preglednosti")}<div><h2>Status vsakega projekta je javen.</h2><p>Ko bo prijava dejansko oddana, odobrena ali zaključena, bomo status posodobili na podlagi dokumentov. Za zdaj navedene tri pobude ostajajo v razvoju oziroma pripravi prijave.</p></div></div></section>'
-
-def project(p):
- meth=''.join(f'<li>{escape(x)}</li>' for x in p['methods'])
- outcomes=''.join(f'<li>{escape(x)}</li>' for x in p['outcomes'])
- sources=''.join(f'<li>{ext(h,t)}</li>' for t,h in p['sources'])
- return f'''<section class="project-hero"><div class="wrap">{eyebrow('Projektni portfelj / '+p['tag'])}<div class="breadcrumbs">{link('projekti','Projekti')} <span>/</span> {escape(p['title'])}</div><h1>{escape(p['title'])}</h1><p class="lead">{escape(p['subtitle'])}</p><div class="project-labels"><span class="status dark">{escape(p['status'])}</span><span>{escape(p['fund'])}</span><span>Samostojna projektna zasnova</span></div></div></section><section class="section project-story"><div class="wrap story-grid"><aside><p class="eyebrow">Raziskovalna oziroma projektna zasnova</p><div class="sticky-meta"><strong>Stanje</strong><span>{escape(p['status'])}</span><strong>Izvajalec</strong><span>ZZT – predlagani prijavitelj</span><strong>Financiranje</strong><span>Ni potrjeno</span></div></aside><article>{photo(p['photo'],'story-photo')}<h2>Razlog in namen</h2><p class="big-paragraph">{escape(p['intro'])}</p><h2>Predvidena metoda</h2><ol class="content-list">{meth}</ol><h2>Pričakovani izdelki</h2><ul class="content-list">{outcomes}</ul><p class="note">Vsi navedeni izdelki so cilji projekta, ne že doseženi rezultati.</p><h2>Osnovni viri</h2><ul class="source-list">{sources}</ul></article></div></section><section class="section olive-section"><div class="wrap"><div class="section-title-row">{band('Kontakt')}<h2>Strokovno sodelovanje pri projektu</h2></div><p>Želite prispevati metodološki pregled, relevantno gradivo ali sodelovanje pri izvedbi?</p><a class="btn primary" href="{MAIL}">Pišite projektni kontaktni osebi <span aria-hidden="true">↗</span></a></div></section>'''
+ cards=''.join(f'''<article class="visual-project research-area"><div class="visual-project-media">{photo(a["photo"],"tile-photo")}</div><div class="visual-project-body"><p class="status">Področje v razvoju</p><h2>{escape(a["title"])}</h2><p class="research-question">{escape(a["question"])}</p><p><strong>Hipoteza za preverjanje:</strong> {escape(a["hypothesis"])}</p><p><strong>Predvidena metoda:</strong> {escape(a["method"])}</p>{ext(a["source_url"],a["source"])}<a href="{url(a["link"])}" class="text-link">Več o delu ↗</a></div></article>''' for a in AREAS)
+ return hero('Raziskovalne smeri','Na katerih vprašanjih <em>gradimo naprej.</em>','To so načrtovane raziskovalne smeri, ne financirani projekti ali že opravljene študije.')+f'''<section class="section"><div class="wrap"><div class="front-section-title"><div>{eyebrow('Predlagana področja dela')}<h2>Od ideje do <em>preverljivega pristopa.</em></h2><p>Pred začetkom vsake raziskave potrebujemo pregled virov, strokovno metodo, izvedbeno ekipo, ustrezna dovoljenja in financiranje. Nobena od spodnjih hipotez še ni potrjen rezultat.</p></div></div><div class="visual-project-grid">{cards}</div></div></section><section class="section olive-section"><div class="wrap two-col">{band('Nadaljnji koraki')}<div><h2>Kako bi iz zamisli nastal projekt?</h2><ol class="method-list"><li><strong>Vprašanje</strong><span>Preverimo, kaj je že znano in katera pojasnila manjkajo.</span></li><li><strong>Protokol</strong><span>Vnaprej določimo metodo, obseg, etična pravila in način preverjanja.</span></li><li><strong>Viri</strong><span>Pridobimo potrebna soglasja, strokovnjake ter razpoložljiva sredstva.</span></li><li><strong>Rezultati</strong><span>Šele izvedeno delo lahko postane javno poročilo ali referenca ZZT.</span></li></ol></div></div></section>'''
 
 def team():
  rows=[
@@ -122,7 +116,7 @@ PAGES={'':('Domov – ZZT','ZZT s sedežem v Kostelu povezuje okoljske raziskave
  'o-zavodu':('O zavodu','Uradno poslanstvo, ustanovitveni akt in registracijski podatki ZZT.',about),
  'raziskave-in-razvoj':('Raziskave in razvoj','Raziskovalna področja, metode in okoljski pilotni projekti ZZT.',research),
  'izobrazevanje-in-mladi':('Izobraževanje in mladi','Programi učenja, mladinskega dela in digitalnih kompetenc v ZZT.',education),
- 'projekti':('Projekti','Preverljivo stanje projektnih zasnov, prijav in raziskovalnih pobud ZZT.',projects),
+ 'projekti':('Raziskovalne smeri','Delovne hipoteze, strokovne smeri in predvidene raziskovalne metode ZZT.',projects),
  'ekipa-in-izkusnje':('Ekipa in izkušnje','Ustanovitelj ZZT in dokumentirane osebne reference v evropskih in mladinskih projektih.',team),
  'sodelovanje':('Sodelovanje','Strokovno sodelovanje z raziskovalci, izobraževalnimi ustanovami in skupnostmi.',cooperation),
  'publikacije-in-objave':('Publikacije in viri','Raziskovalna literatura, dokumenti in načrtovane publikacije ZZT.',publications),
@@ -130,8 +124,6 @@ PAGES={'':('Domov – ZZT','ZZT s sedežem v Kostelu povezuje okoljske raziskave
  'zasebnost':('Zasebnost','Obvestilo o zasebnosti za statično spletno izdajo ZZT.',privacy),
  'viri-fotografij':('Viri fotografij','Avtorji, fotografije in licence vizualnega gradiva spletne strani ZZT.',credits),
 }
-for p in PROJ:
- PAGES['projekti/'+p['slug']]=(p['title'],p['subtitle'],lambda p=p:project(p))
 
 def layout(slug,title,description,content):
  items=''.join(f'<a href="{url(s)}" aria-current="page" class="active"{("" if slug==s else "")}>{escape(label)}</a>' if slug==s else f'<a href="{url(s)}">{escape(label)}</a>' for s,label in NAV)
@@ -146,7 +138,13 @@ for slug,(title,desc,fn) in PAGES.items():
  dest.parent.mkdir(parents=True,exist_ok=True)
  dest.write_text(layout(slug,title,desc,fn()),encoding='utf-8')
 # Keep machine-readable content model for verification/future CMS migration.
-(OUT/'assets'/'projects.json').write_text(json.dumps([{k:v for k,v in p.items() if k!='photo'} for p in PROJ],ensure_ascii=False,indent=2),encoding='utf-8')
+(OUT/'assets'/'research-areas.json').write_text(json.dumps([{k:v for k,v in a.items() if k!='photo'} for a in AREAS],ensure_ascii=False,indent=2),encoding='utf-8')
+legacy_data=OUT/'assets'/'projects.json'
+if legacy_data.exists(): legacy_data.unlink()
+from shutil import rmtree
+for old_slug in ('obala-v-podatkih','mladi-za-pregledne-odlocitve','graditeljska-dediscina-kostela'):
+ old_dir=OUT/'projekti'/old_slug
+ if old_dir.is_dir(): rmtree(old_dir)
 (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: https://zavod-zzt.eu/sitemap.xml\n',encoding='utf-8')
 (OUT/'CNAME').write_text('zavod-zzt.eu\n',encoding='utf-8')
 (OUT/'.nojekyll').touch()
