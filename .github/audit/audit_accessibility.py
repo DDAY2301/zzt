@@ -45,6 +45,8 @@ def scan(page, mode):
 def skip_link(page):
     page.keyboard.press("Tab")
     first = page.evaluate("document.activeElement.getAttribute('href')")
+    if first != "#main":
+        return False
     page.keyboard.press("Enter")
     skipped = page.evaluate("location.hash") == "#main"
     page.keyboard.press("Tab")
@@ -82,9 +84,9 @@ with sync_playwright() as playwright:
                 if mode == "mobile":
                     assert selected.endswith("kolpa-960.webp"), selected
                 print("Responsive homepage photo:", mode, selected)
+                keyboard.append({"test": f"skip to content on {mode}", "pass": skip_link(page)})
                 page.locator(".front-hero-photo figcaption a").click(trial=True, timeout=5000)
                 print("Photo attribution reachable:", mode)
-                keyboard.append({"test": f"skip to content on {mode}", "pass": skip_link(page)})
                 if mode == "mobile":
                     page.goto(base, wait_until="load")
                     page.add_script_tag(path=axe)
