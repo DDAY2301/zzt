@@ -79,6 +79,17 @@ try:
                     visit=page.goto('https://zavod-zzt.eu/'+slug+'/',wait_until='domcontentloaded',timeout=20000)
                     if not (visit and visit.status==200 and page.locator('h1').count()==1):
                         report['errors'].append('Production route failed: '+slug)
+                    visible=page.locator('body').inner_text()
+                    if slug=='projekti':
+                        if 'Okolje in primerljivi podatki' not in visible or 'Hipoteza za preverjanje' not in visible:
+                            report['errors'].append('Production research topics are not current')
+                        if any(x in visible for x in ('Prijava v pripravi','RISTANC','Living Legacy','CSF —')):
+                            report['errors'].append('Unfunded project cards still shown on production')
+                    if slug=='kontakt':
+                        if 'dan.grmusa@gmail.com' not in visible:
+                            report['errors'].append('Founder contact missing from production')
+                        if any(x in visible for x in ('7615914000','860103075','E10446761','Slavski Laz 6')):
+                            report['errors'].append('Unnecessary registration identifiers remain on production')
                 report['live']['checked_routes']=['/','/projekti/','/kontakt/']
         except Exception as exc:
             report['live']={'status':'unverified','reason':str(exc)[:300]}
