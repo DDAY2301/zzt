@@ -52,6 +52,18 @@ try:
             assert not errors,(label,errors)
             report['local'][label]={'width':width,'scrollWidth':measured['scroll'],'kolpaPhotosLoaded':len(sizes),'jsErrors':len(errors),'pass':True}
             if label=='desktop':
+                photo_frame = page.locator('.front-intro-photo .photo-frame')
+                photo = photo_frame.locator('img').element_handle()
+                page.wait_for_function("(el) => getComputedStyle(el).opacity === '0.78'", arg=photo, timeout=5000)
+                photo_frame.scroll_into_view_if_needed()
+                page.wait_for_function("(el) => getComputedStyle(el).opacity === '1'", arg=photo, timeout=5000)
+                page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+                page.wait_for_function("(el) => getComputedStyle(el).opacity === '0.78'", arg=photo, timeout=5000)
+                page.emulate_media(reduced_motion='reduce')
+                assert photo.evaluate("(el) => getComputedStyle(el).opacity === '1' && getComputedStyle(el).transitionDuration === '0s'")
+                page.emulate_media(reduced_motion='no-preference')
+                report['local']['photo_fade_and_reduced_motion'] = True
+
                 page.locator('nav.main-nav a[href="/projekti/"]').click()
                 assert page.url.endswith('/projekti/'),'Project navigation failed'
                 assert page.locator('h1').count()==1,'Projects h1'

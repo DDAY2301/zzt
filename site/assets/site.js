@@ -41,6 +41,18 @@
     }
   }
 
+  if ('IntersectionObserver' in window) {
+    const photoObserver = new IntersectionObserver((entries) => {
+      for (const { target, isIntersecting } of entries) {
+        target.classList.toggle('is-at-edge', !isIntersecting);
+      }
+    }, { rootMargin: '-88px 0px' });
+
+    for (const frame of document.querySelectorAll('.photo:not(.front-hero-photo) .photo-frame')) {
+      photoObserver.observe(frame);
+    }
+  }
+
   for (const img of document.querySelectorAll('.photo img')) {
     const figure = img.closest('.photo');
     if (!figure) continue;
