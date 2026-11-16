@@ -21,7 +21,7 @@ results = []
 keyboard = []
 reflow = []
 issues = defaultdict(lambda: {"views": set(), "examples": {}})
-manual = defaultdict(set)
+manual = defaultdict(lambda: {"views": set(), "examples": set()})
 
 def scan(page, mode):
     report = page.evaluate(
@@ -38,7 +38,9 @@ def scan(page, mode):
             if len(group["examples"]) < 14:
                 group["examples"].setdefault(selector, node["failureSummary"])
     for item in report["incomplete"]:
-        manual[item["id"]].add(view)
+        row = manual[item["id"]]
+        row["views"].add(view)
+        row["examples"].update(" ".join(map(str, n["target"])) for n in item["nodes"])
 
 def skip_link(page):
     page.keyboard.press("Tab")
@@ -66,6 +68,12 @@ with sync_playwright() as playwright:
                 reflow.append({"route": url, "pass": widths[0] <= widths[1] + 1,
                                "content": widths[0], "viewport": widths[1]})
                 page.set_viewport_size({"width": size, "height": 850})
+            if url.endswith("/ekipa-in-izkusnje/") and mode == "mobile":
+                table = page.get_by_role("region", name="Dokumentirano sodelovanje.")
+                table.focus()
+                table.press("ArrowRight")
+                page.wait_for_function("document.querySelector('[aria-labelledby=osebne-reference]').scrollLeft > 0", timeout=5000)
+                keyboard.append({"test": "project references table scrolls with arrow key", "pass": True})
             if url == base:
                 keyboard.append({"test": f"skip to content on {mode}", "pass": skip_link(page)})
                 if mode == "mobile":
@@ -102,10 +110,14 @@ summary = {
     "routes": len(routes), "scans": len(results), "keyboard": keyboard, "reflow": reflow,
     "violations": {name: {"views": sorted(item["views"]), "examples": item["examples"]}
                    for name, item in sorted(issues.items())},
-    "requires_manual_review": {name: sorted(views) for name, views in sorted(manual.items())},
+    "requires_manual_review": {name: {"views": sorted(row["views"]), "examples": sorted(row["examples"])[:25]}
+                               for name, row in sorted(manual.items())},
 }
 Path("audit-results").mkdir(exist_ok=True)
 Path("audit-results/accessibility.json").write_text(
     json.dumps({"summary": summary, "scans": results}, ensure_ascii=False, indent=2), encoding="utf-8"
 )
 print(json.dumps(summary, ensure_ascii=False, indent=2))
+
+if summary["violations"] or not all(row["pass"] for row in keyboard + reflow):
+    raise SystemExit("Accessibility regressions detected. Inspect the summary above.")

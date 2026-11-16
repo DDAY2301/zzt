@@ -41,7 +41,7 @@ button {
   font:inherit
 }
 
-a:focus-visible,button:focus-visible {
+a:focus-visible,button:focus-visible,.table-scroller:focus-visible {
   outline:3px solid #83b04c;
   outline-offset:4px;
   border-radius:2px
@@ -312,7 +312,7 @@ hr {
   color:var(--white)
 }
 
-.olive-section p,.olive-section .eyebrow {
+.olive-section p,.olive-section .eyebrow,.olive-section .method-list span,.olive-section .method-list li::before {
   color:#d6e0d2!important
 }
 
