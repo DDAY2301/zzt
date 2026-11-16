@@ -82,6 +82,8 @@ with sync_playwright() as playwright:
                 if mode == "mobile":
                     assert selected.endswith("kolpa-960.webp"), selected
                 print("Responsive homepage photo:", mode, selected)
+                page.locator(".front-hero-photo figcaption a").click(trial=True, timeout=5000)
+                print("Photo attribution reachable:", mode)
                 keyboard.append({"test": f"skip to content on {mode}", "pass": skip_link(page)})
                 if mode == "mobile":
                     page.goto(base, wait_until="load")
