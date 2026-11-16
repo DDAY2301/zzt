@@ -33,6 +33,8 @@ jobs:
           python3 src/build_site.py
       - name: Cache licensed photographs for stable display
         run: python3 src/cache_photos.py
+      - name: Keep GitHub Pages branch-root compatible
+        run: python3 src/mirror_pages_root.py
       - name: Validate generated website and JavaScript
         run: |
           test -f site/index.html
@@ -40,6 +42,9 @@ jobs:
           test -f site/CNAME
           test -f site/sitemap.xml
           test -f site/robots.txt
+          cmp index.html site/index.html
+          cmp assets/site.css site/assets/site.css
+          cmp assets/site.js site/assets/site.js
           node --check site/assets/site.js
           python3 src/qa_static.py
           python3 -c "from pathlib import Path; p=list(Path('site').rglob('index.html')); assert len(p)>=14; assert sum('Kolpa' in x.read_text(encoding='utf-8') for x in p)>0; assert all('zavod-zzt.eu' in x.read_text(encoding='utf-8') for x in p); print('Checked',len(p),'site pages')"
@@ -48,7 +53,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A site/
+          git add -A -- site/ assets/ index.html 404.html CNAME .nojekyll sitemap.xml robots.txt .pages-root-manifest.json o-zavodu/ raziskave-in-razvoj/ izobrazevanje-in-mladi/ projekti/ ekipa-in-izkusnje/ sodelovanje/ publikacije-in-objave/ kontakt/ zasebnost/ viri-fotografij/
           if ! git diff --cached --quiet; then
             git commit -m "chore: synchronize generated website [skip ci]"
             git push origin HEAD:main

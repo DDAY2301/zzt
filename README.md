@@ -23,7 +23,7 @@ Spletna stran zasebnega nepridobitnega zavoda s sedežem v Kostelu. Poudarek je 
 
 Za besedila, strani, projektne statuse in navedbe urejajte `src/build_site.py`. Za videz urejajte `site/assets/site.css`; za interakcije `site/assets/site.js`.
 
-Spremembe na veji `main` sprožijo GitHub Actions. Pred objavo se znova ustvarijo HTML strani, pripravijo lokalne kopije licenciranih fotografij ter preverijo povezave in sintaksa. **Ustvarjene datoteke se samodejno shranijo tudi nazaj v repozitorij**, tako da sta javna stran in vsebina `site/` usklajeni.
+Spremembe na veji `main` sprožijo GitHub Actions. Pred objavo se znova ustvarijo HTML strani, pripravijo lokalne kopije licenciranih fotografij ter preverijo povezave in sintaksa. **Ustvarjene datoteke se samodejno shranijo tudi nazaj v repozitorij**, tako da sta javna stran in vsebina `site/` usklajeni. Ker lahko GitHub Pages objavlja iz veje ali prek Actions, se javna mapa varno preslika tudi v koren repozitorija. Ne urejajte obeh kopij ročno; vir ostajata `src/build_site.py` in `site/assets/`.
 
 ## Lokalni zagon
 

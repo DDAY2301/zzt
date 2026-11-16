@@ -1,0 +1,111 @@
+[
+  {
+    "slug": "obala-v-podatkih",
+    "title": "Obala v podatkih",
+    "subtitle": "Pilotno spremljanje vidnih odpadkov na slovenski obali",
+    "status": "Prijava v pripravi",
+    "tag": "Okoljska raziskava",
+    "year": "2026",
+    "fund": "RISTANC — prijavni koncept",
+    "intro": "Predlagan primerjalni terenski pilot na območju Ankarana, Izole in Kopra. Namen je preizkusiti ponovljivo metodo popisa vidnih makroodpadkov, ne napovedati rezultatov pred izvedbo.",
+    "methods": [
+      "Pregled smernic JRC in OSPAR ter priprava popisnega protokola.",
+      "Izbira in dokumentiranje treh dostopnih vzorčnih odsekov.",
+      "Ponovljeni popisi, strukturiran zapis in kontrola kakovosti.",
+      "Primerjalna opisna analiza, odprta objava podatkov in priporočila."
+    ],
+    "outcomes": [
+      "Metodološki protokol",
+      "Evidenca popisov in podatkovna zbirka",
+      "Zaključno analitično poročilo"
+    ],
+    "sources": [
+      [
+        "JRC — Guidance on the monitoring of marine litter",
+        "https://publications.jrc.ec.europa.eu/repository/handle/JRC133594"
+      ],
+      [
+        "ARSO — poročila o monitoringu",
+        "https://www.gov.si/teme/stanje-voda/"
+      ],
+      [
+        "Čista obala 2021",
+        "https://www.gov.si/novice/2021-09-18-cista-obala-2021/"
+      ],
+      [
+        "OSPAR — beach litter",
+        "https://www.ospar.org/work-areas/eiha/marine-litter/assessment-of-marine-litter/beach-litter"
+      ]
+    ]
+  },
+  {
+    "slug": "mladi-za-pregledne-odlocitve",
+    "title": "Mladi za pregledne okoljske odločitve",
+    "subtitle": "Strokovno utemeljeno sodelovanje javnosti",
+    "status": "V razvoju",
+    "tag": "Udeležba javnosti",
+    "year": "2026",
+    "fund": "CSF — koncept hitrega odziva",
+    "intro": "Projektna zasnova za pravočasno razlago strokovnih okoljskih gradiv ter sodelovanje prebivalcev pri konkretnem upravnem postopku. Za prijavo na hitri odziv še potrebujemo preverjen nujni povod.",
+    "methods": [
+      "Preveritev konkretnega postopka in roka za javne pripombe.",
+      "Analiza primarnih uradnih dokumentov in priprava nevtralnega povzetka.",
+      "Ciljno posvetovanje in evidentiranje vprašanj javnosti.",
+      "Pravočasna, dokumentirana oddaja strokovno pregledanih pripomb."
+    ],
+    "outcomes": [
+      "Dokument s pregledom virov",
+      "Javno razumljiv povzetek",
+      "Zapisnik posvetovanja in oddane pripombe"
+    ],
+    "sources": [
+      [
+        "UNECE — Aarhuška konvencija",
+        "https://unece.org/environment-policy/public-participation/aarhus-convention/text"
+      ],
+      [
+        "OECD — Guidelines for Citizen Participation",
+        "https://www.oecd.org/en/publications/2022/09/oecd-guidelines-for-citizen-participation-processes_63b34541.html"
+      ],
+      [
+        "CNVOS — razpisi",
+        "https://www.cnvos.si/razpisi/"
+      ]
+    ]
+  },
+  {
+    "slug": "graditeljska-dediscina-kostela",
+    "title": "Zelena graditeljska dediščina Kostela",
+    "subtitle": "Dokumentiranje tradicionalnega znanja in materialov",
+    "status": "Prijava v pripravi",
+    "tag": "Kulturna dediščina",
+    "year": "2026",
+    "fund": "Living Legacy — projektni koncept",
+    "intro": "Predlog strokovnega dokumentiranja lokalnih graditeljskih praks in povezovanja preverjenih zgodovinskih virov z dostopnimi izobraževalnimi gradivi. Dostop do konkretnih objektov in sogovornikov še ni potrjen.",
+    "methods": [
+      "Pregled registra kulturne dediščine in lokalnih arhivskih virov.",
+      "Dokumentiranje izbranih stavbnih elementov z dovoljenjem lastnikov.",
+      "Intervjuji z nosilci znanja ob vnaprejšnjem soglasju.",
+      "Strokovna kontrola in izdelava digitalnega kataloga."
+    ],
+    "outcomes": [
+      "Dokumentacijski protokol",
+      "Izbor preverjenih primerov stavbne dediščine",
+      "Digitalni katalog z viri"
+    ],
+    "sources": [
+      [
+        "eDediščina — register kulturne dediščine",
+        "https://rkd.situla.org/"
+      ],
+      [
+        "ICOMOS — Built Vernacular Heritage",
+        "https://openarchive.icomos.org/"
+      ],
+      [
+        "UNESCO — etika pri varovanju dediščine",
+        "https://ich.unesco.org/en/ethics-and-ich-00866"
+      ]
+    ]
+  }
+]
