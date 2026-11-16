@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/browser-qa.yml'
       - 'src/qa_e2e.py'
+      - 'src/qa_static.py'
       - 'site/assets/site.css'
       - 'site/assets/site.js'
       - 'src/build_site.py'
