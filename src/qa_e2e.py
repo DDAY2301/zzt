@@ -2,7 +2,7 @@
 """Browser QA of the generated ZZT website; also probes the real custom domain."""
 from playwright.sync_api import sync_playwright
 from pathlib import Path
-import subprocess,time,json,sys
+import subprocess,time,json,sys,re
 
 BASE=Path(__file__).resolve().parents[1]
 OUT=BASE/'qa_artifacts';OUT.mkdir(exist_ok=True)
@@ -88,7 +88,7 @@ try:
                     if slug=='kontakt':
                         if 'dan.grmusa@gmail.com' not in visible:
                             report['errors'].append('Founder contact missing from production')
-                        if any(x in visible for x in ('7615914000','860103075','E10446761','Slavski Laz 6')):
+                        if re.search(r'(?i)(?:matična številka|\\bPIC\\s+\\d{9}\\b|\\bOID\\s+E\\d{8}\\b|\\bSlavski Laz\\s+\\d+\\b)',visible):
                             report['errors'].append('Unnecessary registration identifiers remain on production')
                 report['live']['checked_routes']=['/','/projekti/','/kontakt/']
         except Exception as exc:
