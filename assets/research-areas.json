@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Okolje in primerljivi podatki",
+    "tag": "Okoljske raziskave",
+    "link": "raziskave-in-razvoj",
+    "question": "Kako se opaženi odpadki razlikujejo med obalnimi lokacijami?",
+    "hypothesis": "Na opaženo količino in sestavo lahko vplivajo dostopnost, raba prostora in čas opazovanja. To je hipoteza, ne ugotovitev.",
+    "method": "Predvideni so ponovljivi popisi enako dolgih odsekov, enotne kategorije in zapis okoliščin.",
+    "source": "JRC: spremljanje morskih odpadkov",
+    "source_url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC133594"
+  },
+  {
+    "title": "Razumljive okoljske odločitve",
+    "tag": "Sodelovanje javnosti",
+    "link": "izobrazevanje-in-mladi",
+    "question": "Ali jasni povzetki uradnih gradiv olajšajo sodelovanje prebivalcev?",
+    "hypothesis": "Razlaga dokumentov lahko izboljša razumevanje možnosti za sodelovanje. Dejanski učinek bi bilo treba preveriti.",
+    "method": "Pregled uradnih virov, nevtralni povzetki in prostovoljna ocena njihove razumljivosti.",
+    "source": "UNECE: Aarhuška konvencija",
+    "source_url": "https://unece.org/environment-policy/public-participation/aarhus-convention/text"
+  },
+  {
+    "title": "Dediščina in lokalni materiali",
+    "tag": "Trajnost in dediščina",
+    "link": "raziskave-in-razvoj",
+    "question": "Kaj lahko preverjene tradicionalne gradbene prakse prispevajo k sodobni uporabi materialov?",
+    "hypothesis": "Izbrane tradicionalne rešitve so lahko koristno izhodišče, vendar jih je treba preveriti glede na današnje zahteve.",
+    "method": "Pregled registrov in literature, dokumentiranje s soglasji ter neodvisen strokovni pregled.",
+    "source": "UNESCO: etika varovanja dediščine",
+    "source_url": "https://ich.unesco.org/en/ethics-and-ich-00866"
+  }
+]
