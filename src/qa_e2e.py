@@ -61,14 +61,32 @@ try:
             assert resp and resp.status==200,(slug,resp.status if resp else None)
             assert page.locator('h1').count()==1,slug
         report['local']['routes']=14
+        # Production must show the actual homepage, not a README auto-page.
         try:
-            resp=page.goto('https://zavod-zzt.eu/',wait_until='domcontentloaded',timeout=20000)
-            report['live']={'status':resp.status if resp else None,'title':page.title(),'hasZZT':page.locator('h1').count()==1,'url':page.url}
+            live_ok=False
+            for attempt in range(6):
+                resp=page.goto('https://zavod-zzt.eu/',wait_until='domcontentloaded',timeout=20000)
+                h1=page.locator('h1').first.inner_text() if page.locator('h1').count()==1 else ''
+                live_ok=bool(resp and resp.status==200 and 'Razumeti okolje.' in h1)
+                if live_ok:
+                    break
+                page.wait_for_timeout(2500)
+            report['live']={'status':resp.status if resp else None,'title':page.title(),'hasZZT':live_ok,'url':page.url,'h1':h1,'attempts':attempt+1}
+            if not live_ok:
+                report['errors'].append('Production homepage is not the actual ZZT website')
+            else:
+                for slug in ('projekti','kontakt'):
+                    visit=page.goto('https://zavod-zzt.eu/'+slug+'/',wait_until='domcontentloaded',timeout=20000)
+                    if not (visit and visit.status==200 and page.locator('h1').count()==1):
+                        report['errors'].append('Production route failed: '+slug)
+                report['live']['checked_routes']=['/','/projekti/','/kontakt/']
         except Exception as exc:
             report['live']={'status':'unverified','reason':str(exc)[:300]}
+            report['errors'].append('Production verification failed: '+str(exc)[:150])
         browser.close()
     (OUT/'browser qa.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(report,ensure_ascii=False,indent=2))
+    assert not report['errors'], report['errors']
 finally:
     server.terminate()
     try:server.wait(timeout=5)
