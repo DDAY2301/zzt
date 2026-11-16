@@ -36,7 +36,9 @@ try:
             sizes=imgs.evaluate_all('es => es.map(e => ({loaded:e.complete && e.naturalWidth>0,width:e.naturalWidth,src:e.currentSrc}))')
             assert all(v['loaded'] for v in sizes),(label,'Kolpa image failed to render',sizes)
             assert sizes[0]['src'].endswith('.webp'), (label, 'responsive homepage photo not selected')
-            page.locator('.front-hero-photo figcaption a').click(trial=True, timeout=5000)
+            caption = page.locator('.front-hero-photo figcaption')
+            assert caption.evaluate("(el) => el.getBoundingClientRect().top >= el.previousElementSibling.getBoundingClientRect().bottom - 1"), (label, 'credit overlays photograph')
+            caption.locator('a').click(trial=True, timeout=5000)
             if width<=1180:
                 toggle=page.locator('.menu-toggle')
                 toggle.click()
@@ -62,6 +64,9 @@ try:
                 report['local']['research_method_links'] = 3
                 page.goto('http://127.0.0.1:8765/kontakt/',wait_until='domcontentloaded')
                 assert page.locator('a.contact-mail').get_attribute('href')=='mailto:dan.grmusa@gmail.com','Contact email'
+                page.goto('http://127.0.0.1:8765/', wait_until='domcontentloaded')
+                page.get_by_role('link', name='Osebne reference in organizacije').click()
+                assert page.locator('#organizacije .organisation-list li').count() >= 7
             context.close()
         context=browser.new_context(viewport={'width':1280,'height':800})
         page=context.new_page()
