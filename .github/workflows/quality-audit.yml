@@ -1,4 +1,4 @@
-name: Validate ZZT accessibility and image improvements
+name: Audit published ZZT accessibility and performance
 
 on:
   push:
@@ -8,62 +8,70 @@ permissions:
   contents: read
 
 jobs:
-  quality:
+  accessibility:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
-    env:
-      ZZT_AUDIT_URL: http://127.0.0.1:8765/
-      CHROME_PATH: /usr/bin/google-chrome
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Prepare responsive derivatives of the licensed original
+      - name: Install browser and axe-core
         run: |
-          python -m pip install --disable-pip-version-check pillow==11.3.0
-          python - <<'PY'
-          import base64
-          from hashlib import sha256
-          from pathlib import Path
-
-          from PIL import Image, ImageOps
-
-          assets = Path("site/assets/photos")
-          original = ImageOps.exif_transpose(Image.open(assets / "b527e1baf61975f3.jpg")).convert("RGB")
-          for width in (960, 1600):
-              assert original.width >= width, original.size
-              height = round(original.height * width / original.width)
-              path = assets / f"kolpa-{width}.webp"
-              original.resize((width, height), Image.Resampling.LANCZOS).save(path, "WEBP", quality=81, method=6)
-              data = path.read_bytes()
-              print("WEBP_FILE", path.name, len(data), width, height, sha256(data).hexdigest())
-              encoded = base64.b64encode(data).decode()
-              for offset in range(0, len(encoded), 6000):
-                  print("WEBP_DATA", path.name, offset // 6000, encoded[offset:offset + 6000])
-          PY
-      - name: Build and run static and browser checks
-        run: |
-          python src/build_site.py
-          python src/cache_photos.py
-          python src/qa_static.py
           python -m pip install --disable-pip-version-check playwright
           python -m playwright install --with-deps chromium
           npm install --prefix "$RUNNER_TEMP/zzt-audit" --no-save --no-package-lock axe-core@4.10.3
-          python src/qa_e2e.py
-      - name: Check accessibility of the corrected routes
-        run: |
-          python -m http.server 8765 --directory site > "$RUNNER_TEMP/zzt-preview.log" 2>&1 &
-          trap 'kill $!' EXIT
-          curl --silent --show-error --retry 5 --retry-connrefused --retry-delay 1 --fail "$ZZT_AUDIT_URL" -o /dev/null
-          AXE_SCRIPT="$RUNNER_TEMP/zzt-audit/node_modules/axe-core/axe.min.js" python .github/audit/audit_accessibility.py
+      - name: Audit production pages with axe-core and keyboard checks
+        run: AXE_SCRIPT="$RUNNER_TEMP/zzt-audit/node_modules/axe-core/axe.min.js" python .github/audit/audit_accessibility.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ZZT-quality-candidate
-          path: |
-            audit-results/accessibility.json
-            site/assets/photos/kolpa-*.webp
+          name: ZZT-accessibility-audit
+          path: audit-results/accessibility.json
+  performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Measure the public site with Lighthouse
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          mkdir -p audit-results
+          npm install --prefix "$RUNNER_TEMP/zzt-audit" --no-save --no-package-lock lighthouse@12.6.0
+          lighthouse="$RUNNER_TEMP/zzt-audit/node_modules/.bin/lighthouse"
+          run_lighthouse() {
+            name="$1"
+            url="$2"
+            shift 2
+            "$lighthouse" "$url" --chrome-flags="--headless --no-sandbox" --only-categories=performance --output=json --output-path="audit-results/$name.json" --quiet "$@"
+          }
+          for run in 1 2 3; do
+            run_lighthouse "home-mobile-$run" https://zavod-zzt.eu/
+          done
+          run_lighthouse home-desktop https://zavod-zzt.eu/ --preset=desktop
+          run_lighthouse projects-mobile https://zavod-zzt.eu/projekti/
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          for file in sorted(Path("audit-results").glob("*.json")):
+              report = json.loads(file.read_text())
+              assert not report.get("runtimeError"), report.get("runtimeError")
+              audits = report["audits"]
+              values = {label: round(audits[id]["numericValue"], 3) for label, id in (
+                  ("LCP_ms", "largest-contentful-paint"), ("CLS", "cumulative-layout-shift"),
+                  ("TBT_ms", "total-blocking-time"), ("TTFB_ms", "server-response-time"),
+              )}
+              values["performance"] = round(report["categories"]["performance"]["score"] * 100)
+              lcp = audits.get("largest-contentful-paint-element", {})
+              values["lcp_element"] = str(lcp.get("details", {}).get("items", []))[:1200]
+              print(file.stem, report["finalDisplayedUrl"], json.dumps(values))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ZZT-lighthouse-results
+          path: audit-results

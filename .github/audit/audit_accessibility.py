@@ -75,6 +75,13 @@ with sync_playwright() as playwright:
                 page.wait_for_function("document.querySelector('[aria-labelledby=osebne-reference]').scrollLeft > 0", timeout=5000)
                 keyboard.append({"test": "project references table scrolls with arrow key", "pass": True})
             if url == base:
+                hero = page.locator(".front-hero-photo img")
+                assert hero.evaluate("(el) => el.complete && el.naturalWidth > 0"), mode
+                selected = hero.evaluate("(el) => el.currentSrc")
+                assert selected.endswith(".webp"), (mode, selected)
+                if mode == "mobile":
+                    assert selected.endswith("kolpa-960.webp"), selected
+                print("Responsive homepage photo:", mode, selected)
                 keyboard.append({"test": f"skip to content on {mode}", "pass": skip_link(page)})
                 if mode == "mobile":
                     page.goto(base, wait_until="load")
