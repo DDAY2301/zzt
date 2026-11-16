@@ -50,7 +50,7 @@ for f in PAGES:
         assert img.get('src','').startswith(('https://commons.wikimedia.org/','/assets/')),(f,'unknown photo origin',img.get('src'))
 
 home=(ROOT/'index.html').read_text(encoding='utf-8')
-assert home.count('Special:FilePath/Kolpa')>=3,'Homepage needs three authentic Kolpa photos'
+assert home.count('commons.wikimedia.org/wiki/File:Kolpa')>=3,'Homepage needs three authentic Kolpa photos'
 assert 'dan.grmusa@gmail.com' in home,'Real contact absent'
 assert 'Dan Fredi Grmuša' in home,'Founder absent'
 for disallowed in ('14+ izvedenih projektov','20+ strokovnjakov','Sofinancira Evropska unija','lorem ipsum'):

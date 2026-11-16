@@ -31,6 +31,8 @@ jobs:
         run: |
           python3 -m py_compile src/build_site.py
           python3 src/build_site.py
+      - name: Cache licensed photographs for stable display
+        run: python3 src/cache_photos.py
       - name: Validate generated website and JavaScript
         run: |
           test -f site/index.html
