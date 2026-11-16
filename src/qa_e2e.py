@@ -32,7 +32,7 @@ try:
                 page.wait_for_function('(el) => el.complete && el.naturalWidth > 0',arg=image.element_handle(),timeout=15000)
             sizes=imgs.evaluate_all('es => es.map(e => ({loaded:e.complete && e.naturalWidth>0,width:e.naturalWidth,src:e.currentSrc}))')
             assert all(v['loaded'] for v in sizes),(label,'Kolpa image failed to render',sizes)
-            if label=='mobile':
+            if label in ('tablet','mobile'):
                 toggle=page.locator('.menu-toggle')
                 toggle.click()
                 assert toggle.get_attribute('aria-expanded')=='true','menu did not open'
