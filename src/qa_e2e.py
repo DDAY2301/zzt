@@ -51,6 +51,13 @@ try:
                 page.locator('nav.main-nav a[href="/projekti/"]').click()
                 assert page.url.endswith('/projekti/'),'Project navigation failed'
                 assert page.locator('h1').count()==1,'Projects h1'
+                for title in ('Okolje in primerljivi podatki', 'Razumljive okoljske odločitve', 'Dediščina in lokalni materiali'):
+                    page.goto('http://127.0.0.1:8765/', wait_until='domcontentloaded')
+                    page.get_by_role('link', name=f'Metoda in ozadje: {title}', exact=True).click()
+                    assert '/projekti/#' in page.url, (title, page.url)
+                    assert page.locator('h2:target').inner_text() == title, (title, page.url)
+                    assert page.locator('h2:target').locator('xpath=..').get_by_text('Predvidena metoda:', exact=True).is_visible(), title
+                report['local']['research_method_links'] = 3
                 page.goto('http://127.0.0.1:8765/kontakt/',wait_until='domcontentloaded')
                 assert page.locator('a.contact-mail').get_attribute('href')=='mailto:dan.grmusa@gmail.com','Contact email'
             context.close()

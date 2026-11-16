@@ -10,6 +10,16 @@ on:
       - 'site/assets/site.js'
       - 'src/build_site.py'
       - 'src/cache_photos.py'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/browser-qa.yml'
+      - 'src/qa_e2e.py'
+      - 'src/qa_static.py'
+      - 'site/assets/site.css'
+      - 'site/assets/site.js'
+      - 'src/build_site.py'
+      - 'src/cache_photos.py'
   workflow_dispatch:
 
 permissions:
