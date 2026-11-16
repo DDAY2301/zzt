@@ -88,7 +88,7 @@ try:
                     if slug=='kontakt':
                         if 'dan.grmusa@gmail.com' not in visible:
                             report['errors'].append('Founder contact missing from production')
-                        if re.search(r'(?i)(?:matična številka|\\bPIC\\s+\\d{9}\\b|\\bOID\\s+E\\d{8}\\b|\\bSlavski Laz\\s+\\d+\\b)',visible):
+                        if re.search(r'(?i)(?:matična številka|\bPIC\s+\d{9}\b|\bOID\s+E\d{8}\b|\bSlavski Laz\s+\d+\b)',visible):
                             report['errors'].append('Unnecessary registration identifiers remain on production')
                 report['live']['checked_routes']=['/','/projekti/','/kontakt/']
         except Exception as exc:
