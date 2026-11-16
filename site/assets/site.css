@@ -2139,3 +2139,20 @@ em {
     text-decoration:underline
   }
 }
+
+/* Research themes are an editorial agenda, not cards for funded grants. */
+.research-area .visual-project-body{min-width:0}
+.research-area .visual-project-body h2,.research-area .visual-project-body h3{font-size:clamp(1.65rem,2.1vw,2.35rem);line-height:1.17;margin:.35rem 0 1rem}
+.research-area .visual-project-body p{line-height:1.65}
+.research-area .visual-project-body .research-question{font-weight:600;font-size:1.04rem;color:#24442e;flex:none}
+.research-area .visual-project-media{min-height:0}
+.research-area .visual-project-body .status{font-size:.69rem;letter-spacing:.06em;text-transform:uppercase}
+.research-topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.15rem}
+.research-topic{padding:clamp(1.4rem,2.7vw,2.6rem);background:#fbfaf5;border-top:3px solid #456844}
+.research-topic h3{font-size:clamp(1.4rem,2vw,2.1rem);line-height:1.25;margin:1rem 0}
+.research-topic p{line-height:1.7;font-size:.96rem}
+.research-topic .text-link{margin-top:1rem}
+.contact-address h3{font-size:clamp(1.4rem,2.1vw,1.85rem);line-height:1.24;margin:1rem 0}
+.contact-address p{max-width:45ch}
+@media(max-width:900px){.research-topics{grid-template-columns:1fr}}
+@media(max-width:590px){.research-area .visual-project-body h2,.research-area .visual-project-body h3{font-size:1.8rem}}

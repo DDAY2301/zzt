@@ -56,11 +56,11 @@ try:
             context.close()
         context=browser.new_context(viewport={'width':1280,'height':800})
         page=context.new_page()
-        for slug in ['','o-zavodu','raziskave-in-razvoj','izobrazevanje-in-mladi','projekti','ekipa-in-izkusnje','sodelovanje','publikacije-in-objave','kontakt','zasebnost','viri-fotografij','projekti/obala-v-podatkih','projekti/mladi-za-pregledne-odlocitve','projekti/graditeljska-dediscina-kostela']:
+        for slug in ['','o-zavodu','raziskave-in-razvoj','izobrazevanje-in-mladi','projekti','ekipa-in-izkusnje','sodelovanje','publikacije-in-objave','kontakt','zasebnost','viri-fotografij']:
             resp=page.goto('http://127.0.0.1:8765/'+(slug+'/' if slug else ''),wait_until='domcontentloaded',timeout=20000)
             assert resp and resp.status==200,(slug,resp.status if resp else None)
             assert page.locator('h1').count()==1,slug
-        report['local']['routes']=14
+        report['local']['routes']=11
         # Production must show the actual homepage, not a README auto-page.
         try:
             live_ok=False

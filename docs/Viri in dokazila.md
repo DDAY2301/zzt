@@ -6,13 +6,12 @@
 - Polni in skrajšani naziv, sedež: akt, 2. člen; sodni sklep in AJPES.
 - Ustanovitelj Dan Fredi Grmuša, direktor po aktu Maj Klemenc: akt, 1. in 15. člen; sodni sklep.
 - Dejavnosti: akt, 4., 7. in 8. člen, vključno z raziskovanjem/razvojem, izobraževanjem, digitalnimi rešitvami in evropskimi projekti.
-- PIC 860103075: uporabniški posnetek Participant Register. Status je bil Declared, NGO in Research Organisation sta bila prijavljena kot Yes; zadnja veljavna validacija ni izkazana.
-- OID E10446761: uporabniški posnetek Erasmus+ Organisation Registration System; registriran, nacionalna certifikacija ni bila izkazana.
+- Evropski registracijski profili: obstoj je izkazan s predloženimi posnetki; aktualno validacijo je treba preveriti v pristojnem sistemu.
 
 ## Osebne izkušnje (ni zgodovina izvajanja ZZT)
 
-- GREENCULTLABS (ID 101350865), oddano 5. 5. 2026: e-poštno obvestilo EU Funding & Tenders, to ne dokazuje odobritve.
-- CARESHIFT (ID 101348330), oddano 28. 4. 2026: e-poštno obvestilo EU Funding & Tenders, to ne dokazuje odobritve.
+- GREENCULTLABS: sodelovanje pri pripravi in oddaji prijave; ne dokazuje odobritve.
+- CARESHIFT: sodelovanje pri pripravi in oddaji prijave; ne dokazuje odobritve.
 - GREEN ROOTS YOUTH: projektna e-pošta o povzetku partnerskih nalog in zbiranje gradiv, ESR 67/100; ESR ni potrdilo o financiranju.
 - DCYDE New Methods of Agro in Croatia: evidenca udeležencev potrjuje vodenje slovenske skupine (9 oseb) in zaključni digitalni priročnik.
 - DCYDE Cookbook from Leftovers: dokumenti za uvod, vsebinski izbor, zaključek; navedba »Editor / record owner Dan F. Grmuša«.
@@ -21,11 +20,12 @@
 - The Power Within, The Future We Want, MEGAPHONE 2025: individualna projektna korespondenca in/ali dokazila o udeležbi.
 - EKOfeed: usklajevanje predloga z Agenzia Promozione Giovani, ni potrjen kot izveden projekt.
 
-## Projekti ZZT
+## Raziskovalne smeri
 
-- Obala v podatkih: osnutek RISTANC; status PRIJAVA V PRIPRAVI, ne dejanska oddaja.
-- Mladi za pregledne okoljske odločitve: zasnova CSF, status V RAZVOJU, sprožilni dogodek ni potrjen.
-- Zelena graditeljska dediščina Kostela: zasnova Living Legacy, status PRIJAVA V PRIPRAVI; lokacije in soglasja za dokumentiranje niso potrjena.
+- **Okolje in primerljivi podatki:** metodološko vprašanje o primerljivosti popisov odpadkov; raziskava še ni izvedena.
+- **Razumljive okoljske odločitve:** delovna hipoteza o vplivu jasnih povzetkov na razumevanje javnih dokumentov; brez izvedene evalvacije.
+- **Dediščina in lokalni materiali:** zamisel za dokumentiranje praks ob strokovnem pregledu in soglasjih; brez potrjenih terenskih rezultatov.
+- Zavod na strani ne predstavlja nepridobljenega financiranja, neodobrenih razpisov ali zaključnih projektnih rezultatov.
 
 ## Javne raziskave in strokovni viri
 

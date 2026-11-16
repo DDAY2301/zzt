@@ -8,7 +8,7 @@ import re
 
 ROOT=Path(__file__).resolve().parents[1]/'site'
 PAGES=sorted(ROOT.rglob('index.html'))
-assert len(PAGES)>=14, f'Expected 14+ pages; found {len(PAGES)}'
+assert len(PAGES)==11, f'Expected 11 pages; found {len(PAGES)}'
 
 class Links(HTMLParser):
     def __init__(self):
@@ -62,4 +62,13 @@ assert (ROOT/'CNAME').read_text(encoding='utf-8').strip()=='zavod-zzt.eu'
 tree=ET.parse(ROOT/'sitemap.xml')
 entries=tree.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')
 assert len(entries)==len(PAGES),(len(entries),len(PAGES))
+for page in PAGES:
+    html=page.read_text(encoding='utf-8')
+    for confidential in ('7615914000','860103075','E10446761','Slavski Laz 6'):
+        assert confidential not in html,(page,'unnecessary identifier',confidential)
+    for withdrawn in ('projekti/obala-v-podatkih/','projekti/mladi-za-pregledne-odlocitve/','projekti/graditeljska-dediscina-kostela/','Prijava v pripravi'):
+        assert withdrawn not in html,(page,'withdrawn proposal still visible',withdrawn)
+assert (ROOT/'assets'/'research-areas.json').is_file()
+assert not (ROOT/'assets'/'projects.json').exists()
+assert 'Hipoteza' in (ROOT/'projekti'/'index.html').read_text(encoding='utf-8')
 print(f'QA PASS: {len(PAGES)} pages, links, canonical tags, 3 Kolpa photos, attribution source pattern, sitemap and robots')

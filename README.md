@@ -38,7 +38,7 @@ Odprite http://127.0.0.1:8765/. Za lokalne fotografije zaženite tudi `python sr
 
 ## Kakovost, zasebnost in viri
 
-- 14 dejanskih strani (vključno s tremi projektnimi profili), navigacija, odzivnost in SEO.
+- 11 javnih strani, trije metodološki raziskovalni poudarki, navigacija, odzivnost in SEO.
 - Javne registracije in projektne navedbe temeljijo na predloženih dokumentih. Projekti v pripravi **niso** prikazani kot odobreni.
 - Fotografije Kolpe in drugih lokacij so iz Wikimedia Commons; avtorstva ter licence so vidne na strani in evidentirane v [fotografskem registru](docs/Fotografije%20in%20licence.md).
 - [Register virov](docs/Viri%20in%20dokazila.md) pojasnjuje podlago za javne trditve.
@@ -48,3 +48,7 @@ Odprite http://127.0.0.1:8765/. Za lokalne fotografije zaženite tudi `python sr
 ## Pravna opozorila
 
 Vse pravice do fotografij ostanejo pri njihovih avtorjih. Datoteke s pogoji CC BY-SA se uporabljajo z navedbo vira in licence. Stran ni predstavitev zaključenih, financiranih projektov, če so navedeni šele kot projektne zasnove.
+
+## Uredniška politika
+
+Na javni spletni strani ne prikazujemo matične številke, PIC, OID ali polnega naslova. Posamezne razvojne zamisli so opisane kot raziskovalne usmeritve in hipoteze, ne kot prejeta sredstva, oddane prijave ali izvedeni projekti. Pretekle mednarodne aktivnosti so izključno osebne reference ustanovitelja in niso dosežki zavoda.
