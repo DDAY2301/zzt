@@ -54,9 +54,3 @@ Naslovnica, O zavodu, Raziskave in razvoj, Izobraževanje in mladi, Projekti, tr
 ## 5. Kaj ni bilo narejeno
 
 Ni bilo: dostopa do obstoječega ZZT repozitorija; povezave z živo domeno; produkcijske postavitve; potrditve dostave e-pošte; celovitega zunanjega pregleda WCAG 2.2 AA; meritev Lighthouse / Core Web Vitals; resničnega klikovnega end-to-end testa na spletni domeni. Te točke se ne smejo šteti kot zaključene.
-
-## Veščina AI Authenticity & Quality Refiner v2.0
-
-Uporabniško priložena originalna veščina je vključena brez sprememb v `.agents/skills/code-design-authenticity-refiner/`. Odpravi generične uredniške trditve in poudarja preverljive dokaze, kakovost oblikovanja, stabilno kodo ter transparentne omejitve.
-
-**Rezultati revizije v2.0:** glejte `QA Refiner v2.0.md`.
