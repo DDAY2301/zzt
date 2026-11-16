@@ -146,9 +146,9 @@ for slug,(title,desc,fn) in PAGES.items():
  dest.write_text(layout(slug,title,desc,fn()),encoding='utf-8')
 # Keep machine-readable content model for verification/future CMS migration.
 (OUT/'assets'/'projects.json').write_text(json.dumps([{k:v for k,v in p.items() if k!='photo'} for p in PROJ],ensure_ascii=False,indent=2),encoding='utf-8')
-(OUT/'robots.txt').write_text('User-agent: *\\nAllow: /\\nSitemap: https://zavod-zzt.eu/sitemap.xml\\n'.replace('\\n','\\n'),encoding='utf-8')
-(OUT/'CNAME').write_text('zavod-zzt.eu\\n'.replace('\\n','\n'),encoding='utf-8')
+(OUT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: https://zavod-zzt.eu/sitemap.xml\n',encoding='utf-8')
+(OUT/'CNAME').write_text('zavod-zzt.eu\n',encoding='utf-8')
 (OUT/'.nojekyll').touch()
-(OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\\n' + ''.join('<url><loc>https://zavod-zzt.eu'+url(slug)+'</loc></url>\\n' for slug in PAGES) + '</urlset>\\n',encoding='utf-8')
+(OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join('<url><loc>https://zavod-zzt.eu'+url(slug)+'</loc></url>\n' for slug in PAGES) + '</urlset>\n',encoding='utf-8')
 (OUT/'404.html').write_text(layout('404','Strani ni mogoče najti','Stran ni na voljo.',f'<section class="section"><div class="wrap"><h1>Strani ni mogoče najti.</h1><p>Naslov ni pravilen ali pa je bila vsebina premaknjena.</p>{link("","Nazaj na naslovnico","btn primary")}</div></section>'),encoding='utf-8')
 print('Created',len(PAGES),'pages at',OUT)
