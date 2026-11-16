@@ -28,15 +28,21 @@ for url in urls:
   asset_name=sha256(url.encode()).hexdigest()[:16]+ext
   dest=ASSETS/asset_name
   try:
-    req=Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; ZZTPublicWebsite/1.0; +https://zavod-zzt.eu/)', 'Accept':'image/jpeg,image/png,image/webp,*/*;q=0.8'})
-    with urlopen(req,timeout=24) as response:
-      mime=response.headers.get('Content-Type','')
-      data=response.read(9_000_001)
-    if not mime.startswith('image/') or not 1000<len(data)<=9_000_000:
-      raise ValueError(f'Unexpected image response: type={mime}, size={len(data)}')
-    if ext in ('.jpg','.jpeg') and data[:2]!=bytes([0xff,0xd8]):
-      raise ValueError('Not a JPEG')
-    dest.write_bytes(data)
+    if dest.exists() and dest.stat().st_size>1000:
+      data=dest.read_bytes()
+      if ext in ('.jpg','.jpeg') and data[:2]!=bytes([0xff,0xd8]):
+        raise ValueError('Invalid cached JPEG')
+      print('REUSED',name,len(data),'bytes')
+    else:
+      req=Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; ZZTPublicWebsite/1.0; +https://zavod-zzt.eu/)', 'Accept':'image/jpeg,image/png,image/webp,*/*;q=0.8'})
+      with urlopen(req,timeout=24) as response:
+        mime=response.headers.get('Content-Type','')
+        data=response.read(9_000_001)
+      if not mime.startswith('image/') or not 1000<len(data)<=9_000_000:
+        raise ValueError(f'Unexpected image response: type={mime}, size={len(data)}')
+      if ext in ('.jpg','.jpeg') and data[:2]!=bytes([0xff,0xd8]):
+        raise ValueError('Not a JPEG')
+      dest.write_bytes(data)
     local='/assets/photos/'+asset_name
     for page in pages:
       html=page.read_text(encoding='utf-8')

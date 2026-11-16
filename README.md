@@ -1,61 +1,50 @@
-# ZZT – Zavod za zeleno tehnologijo | Spletna izdaja 1.0
+# ZZT – Zavod za zeleno tehnologijo
 
-**Datum izdelave:** 16. november 2026  
-**Namen:** uredniško zasnovana, večstranska statična spletna stran za javno predstavitev registriranega zasebnega zavoda.  
-**Status:** lokalna izvedba z izvedenimi statičnimi in izoliranimi brskalniškimi preverjanji; **ni bila nameščena na produkcijsko domeno**.
+**Spletna stran:** https://zavod-zzt.eu/  
+**Izvorna koda:** https://github.com/DDAY2301/zzt  
+**Kontakt:** Dan Fredi Grmuša, ustanovitelj – [dan.grmusa@gmail.com](mailto:dan.grmusa@gmail.com)
 
-## 1. Zagon (Windows)
+Spletna stran zasebnega nepridobitnega zavoda s sedežem v Kostelu. Poudarek je na okoljskih raziskavah, zelenih tehnologijah, izobraževanju mladih ter dokumentiranih projektnih zasnovah. Osebne reference ustanovitelja so ločene od institucionalnega delovanja.
 
-1. Razširite vsebino ZIP v poljubno mapo.
-2. Dvokliknite `START PREVIEW.bat` (zahtevan Python in ukaz `py`).
-3. Odprite `http://127.0.0.1:8765/`, če se brskalnik ne odpre samodejno.
-4. Zaustavite strežnik z `Ctrl+C` v konzoli.
+## Struktura
 
-Alternativa:
+| Mapa | Vloga |
+|---|---|
+| `site/` | **Dejanska javna stran:** vse HTML datoteke, CSS, JavaScript, favicon, fotografije, sitemap in CNAME |
+| `site/assets/site.css` | Oblika za namizne, tablične in mobilne zaslone |
+| `site/assets/site.js` | Dostopna mobilna navigacija in obravnava napak fotografij |
+| `src/build_site.py` | Enoten vir besedil in strukture za 14 strani |
+| `src/cache_photos.py` | Prenos dovoljenih resničnih fotografij Wikimedia Commons, z ohranjenim avtorstvom |
+| `src/qa_static.py`, `src/qa_e2e.py` | Preverjanje povezav, vsebine, mobilnega prikaza, fotografij in navigacije |
+| `.github/workflows/` | Samodejna priprava, preverjanje in objava GitHub Pages |
+| `docs/` | Viri dejanskih trditev, licence fotografij in pregled kakovosti |
 
-```powershell
-cd "pot-do-mape\ZZT Spletna stran"
-py -m http.server 8765 --directory site
+## Kako spremeniti spletno stran
+
+Za besedila, strani, projektne statuse in navedbe urejajte `src/build_site.py`. Za videz urejajte `site/assets/site.css`; za interakcije `site/assets/site.js`.
+
+Spremembe na veji `main` sprožijo GitHub Actions. Pred objavo se znova ustvarijo HTML strani, pripravijo lokalne kopije licenciranih fotografij ter preverijo povezave in sintaksa. **Ustvarjene datoteke se samodejno shranijo tudi nazaj v repozitorij**, tako da sta javna stran in vsebina `site/` usklajeni.
+
+## Lokalni zagon
+
+Potrebujete Python 3.11+; ni potrebnih Node odvisnosti za delovanje strani.
+
+```bash
+python src/build_site.py
+python -m http.server 8765 --directory site
 ```
 
-Za namestitev na statično gostovanje objavite **celotno mapo `site/` v korenu domene**, saj poti uporabljajo začetni `/` (npr. `/projekti/`). Na voljo je tudi osnovni `netlify.toml` za Netlify. Strežnik in vsebina ne zahtevata npm, podatkovne baze ali API ključa.
+Odprite http://127.0.0.1:8765/. Za lokalne fotografije zaženite tudi `python src/cache_photos.py`, ko imate omrežni dostop.
 
-## 2. Zgradba
+## Kakovost, zasebnost in viri
 
-- `site/` – vse HTML strani, CSS, JS, favicon, JSON projektov, robots.txt.
-- `src/build_site.py` – vir za ustvarjanje 14 HTML strani (brez odvisnosti).
-- `src/qa_browser.py` – Playwright izolirani DOM/test navigacijskega menija.
-- `NETLIFY`: `netlify.toml` – primer konfiguracije za statično objavo in varnostne glave.
-- `Viri in dokazila.md` – povezava med javnimi trditvami, dokumenti in stanjem dokazil.
-- `Fotografije in licence.md` – evidenca fotografij in njihovih pogojev.
-- `QA poročilo.md` – pošteno poročilo, kaj je dejansko izmerjeno.
+- 14 dejanskih strani (vključno s tremi projektnimi profili), navigacija, odzivnost in SEO.
+- Javne registracije in projektne navedbe temeljijo na predloženih dokumentih. Projekti v pripravi **niso** prikazani kot odobreni.
+- Fotografije Kolpe in drugih lokacij so iz Wikimedia Commons; avtorstva ter licence so vidne na strani in evidentirane v [fotografskem registru](docs/Fotografije%20in%20licence.md).
+- [Register virov](docs/Viri%20in%20dokazila.md) pojasnjuje podlago za javne trditve.
+- Kontakt je povezava `mailto:`; neposredni strežniški kontaktni obrazec ni nameščen. Ne trdimo, da je pošiljanje e-pošte avtomatsko.
+- [Pregled preverjanja](docs/Preverjanje%20spletne%20strani.md) in rezultati testov v zavihku **Actions**.
 
-Za ponovno generiranje po spremembi vsebine v Pythonu:
+## Pravna opozorila
 
-```powershell
-py "src\build_site.py"
-```
-
-**Opomba:** `site/assets/site.css`, `site/assets/site.js` in `site/assets/favicon.svg` so ročno vzdrževani; generator jih ne prepiše.
-
-## 3. Strani
-
-Naslovnica, O zavodu, Raziskave in razvoj, Izobraževanje in mladi, Projekti, trije projektni profili, Ekipa in izkušnje, Sodelovanje, Publikacije in objave, Kontakt, Zasebnost in Viri fotografij (skupaj 14 HTML strani).
-
-## 4. Preverjanje pred objavo
-
-- Povezave do fotografij Wikimedia Commons so **zunanje**; v izoliranem testnem brskalniku niso bile dosegljive. Preverite, da se res prikažejo na ciljnem gostovanju, in ohranite podatke o avtorjih/licencah. Ničesar ne predstavljajte kot fotografijo izvedenih projektov ZZT.
-- Kontakt uporablja dejanski `mailto:` naslov projektne kontaktne osebe iz predloženih podatkov, ne pa spletnega kontaktnega obrazca. **Ni potrjenega neposrednega pošiljanja.** Za direct-send bi morali povezati avtoriziran backend ter preveriti dejansko dostavo.
-- Potrebujemo končno produkcijsko domeno za kanonične URL, sitemap.xml, og:url, morebitne preusmeritve in nadzorovalna orodja.
-- Po izbiri gostovanja prilagodite obvestilo o zasebnosti dejanskim obdelavam podatkov in ponudniku.
-- Za projektne statuse vzdržujte evidenco sprememb. Projekti v pripravi niso odobreni ali dokončani.
-- Preverite vsak javni osebni podatek, reference in soglasja zunanjih strokovnjakov pred prodno objavo.
-
-## 5. Kaj ni bilo narejeno
-
-Ni bilo: dostopa do obstoječega ZZT repozitorija; povezave z živo domeno; produkcijske postavitve; potrditve dostave e-pošte; celovitega zunanjega pregleda WCAG 2.2 AA; meritev Lighthouse / Core Web Vitals; resničnega klikovnega end-to-end testa na spletni domeni. Te točke se ne smejo šteti kot zaključene.
-
-
-## GitHub Pages (2026)
-
-Ob spremembah v `src/` ali `site/` GitHub Actions ponovno generira vse strani z `python3 src/build_site.py`, preveri osnovne datoteke, nato objavi `site/`. Izbrane fotografije Kolpe so resnične fotografije Wikimedia Commons (CC0 / public domain), z navedbo virov. Za predogled je možen lokalni Python strežnik.
+Vse pravice do fotografij ostanejo pri njihovih avtorjih. Datoteke s pogoji CC BY-SA se uporabljajo z navedbo vira in licence. Stran ni predstavitev zaključenih, financiranih projektov, če so navedeni šele kot projektne zasnove.

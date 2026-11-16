@@ -39,9 +39,3 @@
 ## Varovanje zasebnosti in uredniške omejitve
 
 Na javni strani ni EMŠO, osebnih bivališč, zasebnih potrdil, telefonskih številk udeležencev, prispevkov drugih organizacij, ki niso dovoljeni za objavo, ali obljub o prejetem financiranju.
-
-## Revizija Authenticity & Quality Refiner v2.0
-
-- Naslovnica jasneje razlikuje med raziskovalnimi področji in projektno pripravo; ne navaja že doseženih rezultatov ZZT.
-- Mednarodne reference so izrecno označene kot osebne izkušnje ustanovitelja, ne organizacijski dosežki zavoda.
-- Zunanje slike imajo izvorne povezave in zaslonski nadomestni prikaz ob napaki; fallback ni fotografija lokacije ali projektni dokaz.

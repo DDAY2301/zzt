@@ -12,7 +12,7 @@ try:
     time.sleep(1.2)
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
-        for label,width,height in [('desktop',1440,900),('tablet',820,1000),('mobile',390,844)]:
+        for label,width,height in [('desktop',1440,900),('tablet',820,1000),('small_tablet',768,1024),('mobile',390,844),('small_mobile',360,780)]:
             context=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1)
             page=context.new_page()
             errors=[]
@@ -35,7 +35,7 @@ try:
                 page.wait_for_function('(el) => el.complete && el.naturalWidth > 0',arg=image.element_handle(),timeout=15000)
             sizes=imgs.evaluate_all('es => es.map(e => ({loaded:e.complete && e.naturalWidth>0,width:e.naturalWidth,src:e.currentSrc}))')
             assert all(v['loaded'] for v in sizes),(label,'Kolpa image failed to render',sizes)
-            if label in ('tablet','mobile'):
+            if width<=1180:
                 toggle=page.locator('.menu-toggle')
                 toggle.click()
                 assert toggle.get_attribute('aria-expanded')=='true','menu did not open'

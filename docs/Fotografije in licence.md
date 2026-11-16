@@ -9,9 +9,7 @@ Fotografije so iz Wikimedia Commons, predstavljajo **lokacije**, niso dokaz deja
 | Izola, Svetilnik | Wikimedia Commons / izvirnik Pixabay | CC0 1.0 | https://commons.wikimedia.org/wiki/File:Izola_-_Petelinji_rt_s_svetilnikom_(2014).jpg |
 | Debeli rtič pri Ankaranu | Andrea Skerlavaj | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Ankaran_(13470221084).jpg |
 
-**Namenoma izpuščena:** datoteka "City beach in Koper, 2026.jpg", ker dovoljenje v okviru te izvedbe ni bilo dovolj natančno preverjeno. Podatek ostaja v razvojnem seznamu, ni pa nikjer prikazan.
-
-**Omejitev:** testno okolje ni moglo prenesti fotografij; njihov dejanski prikaz na ciljnem strežniku je treba preveriti po objavi. Ne predstavljajte pravic fotografov kot pravic ZZT. Ob morebitnih novih vizualnih spremembah preverite pogoje ShareAlike ter ohranite kredit in povezavo do licence.
+**Dovoljenja:** izvirniki s pogoji CC BY-SA so prikazani z avtorstvom, povezavo do datoteke in licenco; uporablja se prilagoditev izreza prikaza. Izvirniki niso vsebinsko ponarejeni.
 
 
 ## Fotografije Kolpe – prenova november 2026
@@ -22,4 +20,4 @@ Tri ločene resnične fotografije reke Kolpe, uporabljene na naslovnici. Vse so 
 - **Kolpa pri Bosljivi Loki** (28. julij 2026), Ajznponar, **CC0 1.0**: https://commons.wikimedia.org/wiki/File:Kolpa_at_the_Na_gricku_park_in_Bosljiva_Loka_03.jpg
 - **KolpaRiver-Slovenia** (13. avgust 2006), Žiga, **public domain**: https://commons.wikimedia.org/wiki/File:KolpaRiver-Slovenia.JPG
 
-Fotografije ostajajo gostovane pri Wikimedia Commons, ker prenos binarnih datotek v tem delovnem okolju ni bil mogoč; ob izpadu zunanje storitve se prikaže nadomestno besedilo in povezava do avtorstva.
+Objavni postopek lokalno shrani kopije dovoljenih fotografij v `site/assets/photos/` in ob vsaki fotografiji ohrani povezavo do izvirnika. V primeru neuspele pridobitve nove datoteke je na voljo nadomestni prikaz.
