@@ -185,6 +185,7 @@ def team():
   ('Agenzia Promozione Giovani (APG)', 'Italija', 'Organizator usposabljanja VIBE.', 'https://www.salto-youth.net/tools/toy/roberto-rossetto.4639/'),
   ('TechSoup Europe', 'Mednarodno', 'Organizator dogodka MEGAPHONE 2025.', 'https://megaphone2025.techsoupeurope.org/'),
   ('Soċjetà Mużikali San Pawl', 'Malta', 'Prijavitelj usposabljanja The Power Within, na katerem je sodeloval ustanovitelj.', 'https://fondi.eu/wp-content/uploads/2026/02/MT-NA-Erasmus-Results-2025.pdf'),
+  ('Centar za razvoj demokratskog društva Europolis', 'Srbija', 'Projektna komunikacija in izmenjava dokumentacije pri zasnovi EKOfeed.', 'https://www.ekapija.com/company/view/180714/centar-za-razvoj-demokratskog-drustva-europolis'),
  ]
  organisation_list = ''.join(
   f'<li><h3>{ext(href, name)}</h3><span class="location">{country}</span><p>{description}</p></li>'
@@ -209,7 +210,10 @@ def team():
  <section class="section" id="organizacije">
   <div class="wrap two-col">
    <h2>Organizacije iz preteklih projektov</h2>
-   <ul class="organisation-list">{organisation_list}</ul>
+   <div>
+    <ul class="organisation-list">{organisation_list}</ul>
+    <p class="note">{ext('https://capacity4dev.europa.eu/projects/dcyde-digital-global-citizenship-youngsters-educators-partnership/info/project-consortium_en', 'Javni seznam širšega konzorcija DCYDE!')}</p>
+   </div>
   </div>
  </section>
  <section class="section cream-section">
