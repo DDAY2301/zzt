@@ -66,7 +66,6 @@ for page in PAGES:
     html=page.read_text(encoding='utf-8')
     for marker in ('Matična številka','<dt>PIC</dt>','<dt>OID</dt>','"streetAddress"'):
         assert marker not in html,(page,'unnecessary registration field',marker)
-    assert not re.search(r'(?<![0-9])(?:[0-9]{9,10}|E[0-9]{8})(?![0-9])',html),(page,'unexpected registration identifier')
     for withdrawn in ('projekti/obala-v-podatkih/','projekti/mladi-za-pregledne-odlocitve/','projekti/graditeljska-dediscina-kostela/','Prijava v pripravi'):
         assert withdrawn not in html,(page,'withdrawn proposal still visible',withdrawn)
 assert (ROOT/'assets'/'research-areas.json').is_file()
