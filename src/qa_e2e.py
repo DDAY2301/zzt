@@ -36,6 +36,7 @@ try:
             sizes=imgs.evaluate_all('es => es.map(e => ({loaded:e.complete && e.naturalWidth>0,width:e.naturalWidth,src:e.currentSrc}))')
             assert all(v['loaded'] for v in sizes),(label,'Kolpa image failed to render',sizes)
             assert sizes[0]['src'].endswith('.webp'), (label, 'responsive homepage photo not selected')
+            page.locator('.front-hero-photo figcaption a').click(trial=True, timeout=5000)
             if width<=1180:
                 toggle=page.locator('.menu-toggle')
                 toggle.click()
