@@ -11,6 +11,7 @@ AS=OUT/'assets'
 AS.mkdir(parents=True,exist_ok=True)
 TITLE='ZZT – Zavod za zeleno tehnologijo'
 EMAIL='dan.grmusa@gmail.com'
+HERO_SRCSET='/assets/photos/kolpa-960.webp 960w, /assets/photos/kolpa-1600.webp 1600w'
 MAIL=f'mailto:{EMAIL}?subject='+quote('Sodelovanje z ZZT – povpraševanje')
 PHOTOS={
  'kolpa_kuzelj': {'src':'https://commons.wikimedia.org/wiki/Special:FilePath/Kolpa_a.k.a_Kupa_between_Kuzelj_and_Gasparci_15.jpg?width=1600','file':'Kolpa a.k.a Kupa between Kuzelj and Gasparci 15.jpg','name':'Reka Kolpa med Kužljem in Gašparci (2026)','author':'Ajznponar','licence':'CC0 1.0','url':'https://commons.wikimedia.org/wiki/File:Kolpa_a.k.a_Kupa_between_Kuzelj_and_Gasparci_15.jpg'},
@@ -41,7 +42,8 @@ def ext(href,title,cls='text-link'):
 def photo(key,cls='',loading='lazy'):
  p=PHOTOS[key]
  priority=' fetchpriority="high"' if loading=='eager' else ''
- return f'<figure class="photo {cls}"><img src="{escape(p["src"],quote=True)}" alt="{escape(p["name"],quote=True)}" loading="{loading}" decoding="async" referrerpolicy="no-referrer"{priority}/><div class="photo-fallback" role="status">Fotografija trenutno ni dosegljiva. Podatki o viru so navedeni spodaj.</div><figcaption>{escape(p["name"])} · {ext(p["url"],p["author"]+" / "+p["licence"],"source-link")}</figcaption></figure>'
+ responsive=f' srcset="{HERO_SRCSET}" sizes="100vw"' if key=='kolpa_kuzelj' else ''
+ return f'<figure class="photo {cls}"><img src="{escape(p["src"],quote=True)}"{responsive} alt="{escape(p["name"],quote=True)}" loading="{loading}" decoding="async" referrerpolicy="no-referrer"{priority}/><div class="photo-fallback" role="status">Fotografija trenutno ni dosegljiva. Podatki o viru so navedeni spodaj.</div><figcaption>{escape(p["name"])} · {ext(p["url"],p["author"]+" / "+p["licence"],"source-link")}</figcaption></figure>'
 
 def eyebrow(t):return f'<p class="eyebrow">{escape(t)}</p>'
 def hero(kicker,title,lead,side='',cls=''):
@@ -90,7 +92,7 @@ def team():
  ]
  table=''.join(f'<tr><td>{y}</td><td><strong>{escape(name)}</strong><span>{escape(desc)}</span></td><td>{escape(state)}</td></tr>' for y,name,desc,state in rows)
  return hero('Ekipa in izkušnje','Za projekte stojijo <em>ljudje.</em>','Pravni nosilec novega zavoda in osebne reference njegovih sodelavcev so različne stvari.')+f'''<section class="section"><div class="wrap two-col">{band('Ustanovitelj')}<div><h2>Dan Fredi Grmuša</h2><p class="subtitle">Ustanovitelj · projektna koordinacija · evropske prijave</p><p>Ukvarja se s koordinacijo projektnih nalog, pridobivanjem informacij od partnerskih organizacij, pripravo dokumentacije za evropske prijave, organizacijo mladinskih projektov in digitalno podporo izvedbi.</p><p>Dokumentirane izkušnje vključujejo sodelovanje pri dveh oddanih evropskih prijavah leta 2026, koordinacijo slovenske mladinske skupine v okviru DCYDE in sodelovanje pri mednarodnih izobraževalnih dejavnostih.</p><p>Njegove izkušnje vključujejo pripravo projektnih vlog, koordinacijo mladinskih skupin, sodelovanje s tujimi organizacijami in urejanje digitalnih gradiv. Te kompetence so izhodišče za izvedljiv načrt, ne dokaz že opravljene znanstvene raziskave. Stiki s profesorji in učitelji omogočajo strokovni posvet, niso pa potrjeno partnerstvo ZZT.</p></div></div></section>
- <section class="section cream-section"><div class="wrap"><div class="section-title-row">{band('Osebne reference')}<div><h2>Dokumentirano sodelovanje.</h2><p>Spodaj navedeni projekti niso bili izvedeni s strani ZZT, ustanovljenega leta 2026. Gre za osebne izkušnje predvidenega izvajalca.</p></div></div><div class="table-scroller"><table class="experience-table"><thead><tr><th>Leto</th><th>Projekt in dejanska naloga</th><th>Vrsta reference</th></tr></thead><tbody>{table}</tbody></table></div><p class="note">Podlaga: interna projektna dokumentacija, uradna e-obvestila o oddaji prijav, Erasmus+ komunikacije in evidenca DCYDE. Posamezna dokazila so dostopna ocenjevalcem na upravičeno zahtevo, ne kot javni arhiv zasebne korespondence.</p></div></section>
+ <section class="section cream-section"><div class="wrap"><div class="section-title-row">{band('Osebne reference')}<div><h2 id="osebne-reference">Dokumentirano sodelovanje.</h2><p>Spodaj navedeni projekti niso bili izvedeni s strani ZZT, ustanovljenega leta 2026. Gre za osebne izkušnje predvidenega izvajalca.</p></div></div><div class="table-scroller" tabindex="0" role="region" aria-labelledby="osebne-reference"><table class="experience-table"><thead><tr><th>Leto</th><th>Projekt in dejanska naloga</th><th>Vrsta reference</th></tr></thead><tbody>{table}</tbody></table></div><p class="note">Podlaga: interna projektna dokumentacija, uradna e-obvestila o oddaji prijav, Erasmus+ komunikacije in evidenca DCYDE. Posamezna dokazila so dostopna ocenjevalcem na upravičeno zahtevo, ne kot javni arhiv zasebne korespondence.</p></div></section>
  <section class="section"><div class="wrap two-col">{band('Upravljanje')}<div><h2>Odgovorna organizacija.</h2><p>Ustanovitelj in glavna kontaktna oseba za projekte je Dan Fredi Grmuša. Pravno zastopanje urejajo ustanovitveni akt in aktualni registrski podatki. Svet zavoda in strokovni svet sta predvidena v aktu; neobjavljenih imenovanj ne predstavljamo kot zasedena mesta.</p>{link('o-zavodu','Pravni podatki <span aria-hidden="true">↗</span>','text-link')}</div></div></section>'''
 
 def cooperation():
@@ -125,7 +127,7 @@ PAGES={'':('Domov – ZZT','ZZT s sedežem v Kostelu povezuje okoljske raziskave
 }
 
 def layout(slug,title,description,content):
- hero_preload = '<link rel="preload" as="image" href="/assets/photos/b527e1baf61975f3.jpg">' if not slug else ''
+ hero_preload = f'<link rel="preload" as="image" imagesrcset="{HERO_SRCSET}" imagesizes="100vw" fetchpriority="high">' if not slug else ''
  items=''.join(f'<a href="{url(s)}" aria-current="page" class="active"{("" if slug==s else "")}>{escape(label)}</a>' if slug==s else f'<a href="{url(s)}">{escape(label)}</a>' for s,label in NAV)
  footeritems=''.join(f'<a href="{url(s)}">{escape(l)}</a>' for s,l in NAV if s!='')
  return f'''<!doctype html>
