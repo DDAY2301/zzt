@@ -22,6 +22,9 @@ try:
             assert page.locator('h1').count()==1,label
             assert page.locator('a[href="/projekti/"]').count()>=1,label
             measured=page.evaluate('({scroll:document.documentElement.scrollWidth,viewport:innerWidth})')
+            if measured['scroll']>width+1:
+                offenders=page.evaluate("""() => [...document.querySelectorAll('body *')].map(el => {let r=el.getBoundingClientRect(); return {tag:el.tagName, cls:String(el.className).slice(0,110), text:(el.textContent||'').trim().slice(0,75), left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width)} }).filter(x => x.right>innerWidth+1 || x.left < -2).slice(0,20)""")
+                print('OVERFLOW DETAILS',label,json.dumps(offenders,ensure_ascii=False),flush=True)
             assert measured['scroll']<=width+1,(label,'horizontal overflow',measured)
             imgs=page.locator('.front-hero-photo img, .front-intro-photo img, .front-kolpa-photo img')
             assert imgs.count()==3,(label,'missing Kolpa photography',imgs.count())
