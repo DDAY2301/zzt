@@ -47,7 +47,7 @@ jobs:
           cmp assets/site.js site/assets/site.js
           node --check site/assets/site.js
           python3 src/qa_static.py
-          python3 -c "from pathlib import Path; p=list(Path('site').rglob('index.html')); assert len(p)>=14; assert sum('Kolpa' in x.read_text(encoding='utf-8') for x in p)>0; assert all('zavod-zzt.eu' in x.read_text(encoding='utf-8') for x in p); print('Checked',len(p),'site pages')"
+          python3 -c "from pathlib import Path; p=list(Path('site').rglob('index.html')); assert len(p)==11; assert sum('Kolpa' in x.read_text(encoding='utf-8') for x in p)>0; assert all('zavod-zzt.eu' in x.read_text(encoding='utf-8') for x in p); print('Checked',len(p),'public pages')"
       - name: Commit generated HTML and licensed photo assets to repository
         if: github.event_name == 'push'
         run: |
