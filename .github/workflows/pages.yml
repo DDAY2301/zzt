@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'site/**'
+      - 'src/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -26,8 +27,19 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v4
-      - name: Verify static site
-        run: test -f site/index.html && test -f site/assets/site.css
+      - name: Build all public pages from verified content model
+        run: |
+          python3 -m py_compile src/build_site.py
+          python3 src/build_site.py
+      - name: Validate generated website and JavaScript
+        run: |
+          test -f site/index.html
+          test -f site/assets/site.css
+          test -f site/CNAME
+          test -f site/sitemap.xml
+          test -f site/robots.txt
+          node --check site/assets/site.js
+          python3 -c "from pathlib import Path; p=list(Path('site').rglob('index.html')); assert len(p)>=14; assert sum('Kolpa' in x.read_text(encoding='utf-8') for x in p)>0; assert all('zavod-zzt.eu' in x.read_text(encoding='utf-8') for x in p); print('Checked',len(p),'site pages')"
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static website

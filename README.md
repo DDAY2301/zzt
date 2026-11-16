@@ -54,3 +54,8 @@ Naslovnica, O zavodu, Raziskave in razvoj, Izobraževanje in mladi, Projekti, tr
 ## 5. Kaj ni bilo narejeno
 
 Ni bilo: dostopa do obstoječega ZZT repozitorija; povezave z živo domeno; produkcijske postavitve; potrditve dostave e-pošte; celovitega zunanjega pregleda WCAG 2.2 AA; meritev Lighthouse / Core Web Vitals; resničnega klikovnega end-to-end testa na spletni domeni. Te točke se ne smejo šteti kot zaključene.
+
+
+## GitHub Pages (2026)
+
+Ob spremembah v `src/` ali `site/` GitHub Actions ponovno generira vse strani z `python3 src/build_site.py`, preveri osnovne datoteke, nato objavi `site/`. Izbrane fotografije Kolpe so resnične fotografije Wikimedia Commons (CC0 / public domain), z navedbo virov. Za predogled je možen lokalni Python strežnik.
