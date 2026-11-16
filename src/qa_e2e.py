@@ -25,6 +25,11 @@ try:
             assert measured['scroll']<=width+1,(label,'horizontal overflow',measured)
             imgs=page.locator('.front-hero-photo img, .front-intro-photo img, .front-kolpa-photo img')
             assert imgs.count()==3,(label,'missing Kolpa photography',imgs.count())
+            # Lazy-loaded pictures below the fold must be scrolled into view first.
+            for i in range(imgs.count()):
+                image=imgs.nth(i)
+                image.scroll_into_view_if_needed()
+                page.wait_for_function('(el) => el.complete && el.naturalWidth > 0',arg=image.element_handle(),timeout=15000)
             sizes=imgs.evaluate_all('es => es.map(e => ({loaded:e.complete && e.naturalWidth>0,width:e.naturalWidth,src:e.currentSrc}))')
             assert all(v['loaded'] for v in sizes),(label,'Kolpa image failed to render',sizes)
             if label=='mobile':
