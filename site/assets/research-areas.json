@@ -1,5 +1,6 @@
 [
   {
+    "id": "okolje-in-primerljivi-podatki",
     "title": "Okolje in primerljivi podatki",
     "tag": "Okoljske raziskave",
     "link": "raziskave-in-razvoj",
@@ -10,6 +11,7 @@
     "source_url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC133594"
   },
   {
+    "id": "razumljive-okoljske-odlocitve",
     "title": "Razumljive okoljske odločitve",
     "tag": "Sodelovanje javnosti",
     "link": "izobrazevanje-in-mladi",
@@ -20,6 +22,7 @@
     "source_url": "https://unece.org/environment-policy/public-participation/aarhus-convention/text"
   },
   {
+    "id": "dediscina-in-lokalni-materiali",
     "title": "Dediščina in lokalni materiali",
     "tag": "Trajnost in dediščina",
     "link": "raziskave-in-razvoj",
