@@ -41,9 +41,10 @@ button {
   font:inherit
 }
 
-a:focus-visible,button:focus-visible {
-  outline:3px solid #83b04c;
+a:focus-visible,button:focus-visible,.table-scroller:focus-visible {
+  outline:3px solid #153324;
   outline-offset:4px;
+  box-shadow:0 0 0 4px #e9f5cd;
   border-radius:2px
 }
 
@@ -312,7 +313,7 @@ hr {
   color:var(--white)
 }
 
-.olive-section p,.olive-section .eyebrow {
+.olive-section p,.olive-section .eyebrow,.olive-section .method-list span,.olive-section .method-list li::before {
   color:#d6e0d2!important
 }
 
@@ -423,7 +424,7 @@ hr {
   bottom:0;
   left:0;
   right:0;
-  background:linear-gradient(transparent,rgba(15,33,25,.76));
+  background:linear-gradient(transparent,rgba(15,33,25,.78) 2.35rem);
   color:#fff;
   padding:2.7rem .85rem .7rem;
   font-size:.68rem;
@@ -1464,7 +1465,7 @@ em {
   position:absolute;
   inset:0;
   z-index:-1;
-  background:linear-gradient(90deg,rgba(13,40,27,.94) 0%,rgba(13,40,27,.81) 32%,rgba(13,40,27,.28) 75%,rgba(13,40,27,.10) 100%)
+  background:linear-gradient(90deg,rgba(13,40,27,.94) 0%,rgba(13,40,27,.81) 32%,rgba(13,40,27,.70) 83%,rgba(13,40,27,.18) 100%)
 }
 
  .front-content {
@@ -1879,6 +1880,10 @@ em {
 }
 
  @media(max-width:1180px) {
+  .front-overlay {
+    background:linear-gradient(90deg,rgba(13,40,27,.89),rgba(13,40,27,.72))
+  }
+
   .header-inner {
     display:flex;
     flex-wrap:nowrap;
