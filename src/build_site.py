@@ -163,8 +163,8 @@ def projects():
 
 def team():
  rows = [
-  ('2026', 'GREENCULTLABS', 'Creative Europe — priprava dokumentacije in oddaja prijave', 'Oddana prijava'),
-  ('2026', 'CARESHIFT', 'CERV — zbiranje profilov, referenc in podatkov partnerjev', 'Oddana prijava'),
+  ('2026', 'GREENCULTLABS', 'Creative Europe — priprava dokumentacije, razvoj in analiza projektnega predloga', 'Razvoj in analiza'),
+  ('2026', 'CARESHIFT', 'CERV — zbiranje profilov, referenc in podatkov partnerjev', 'Razvoj in analiza'),
   ('2026', 'GREEN ROOTS YOUTH', 'Priprava partnerskih povzetkov in usklajevanje nalog', 'Priprava prijave'),
   ('2026', 'EKOfeed', 'Razvoj zasnove in komunikacija s potencialnimi partnerji', 'Razvoj predloga'),
   ('2026', 'DCYDE!: New Methods of Agro in Croatia', 'Vodenje devetčlanske slovenske skupine in priprava priročnika', 'Izvedba'),
@@ -196,13 +196,13 @@ def team():
  <section class="section">
   <div class="wrap two-col">
    {band('Ustanovitelj')}
-   <div><h2>Dan Fredi Grmuša</h2><p class="lead">Projektna koordinacija in priprava evropskih prijav</p><p>Njegovo delo vključuje usklajevanje partnerjev, vodenje mladinskih skupin ter pripravo dokumentacije in digitalnih izobraževalnih gradiv.</p></div>
+   <div><h2>Dan Fredi Grmuša</h2><p class="lead">Projektna koordinacija, razvoj in analiza</p><p>Razvija projektne zasnove in analizira potrebe ter izvedljivost predlogov. Usklajuje partnerje, vodi mladinske skupine ter pripravlja projektno dokumentacijo in digitalna izobraževalna gradiva.</p></div>
   </div>
  </section>
  <section class="section cream-section">
   <div class="wrap">
    <h2 id="osebne-reference">Dokumentirano sodelovanje.</h2>
-   <p>Pregled osebnih referenc ustanovitelja ter njegove vloge pri izvedbi, oddaji prijave ali udeležbi.</p>
+   <p>Osebne reference ustanovitelja pri razvoju, analizi in izvedbi projektov ter udeležbi na mednarodnih dogodkih.</p>
    <div class="table-scroller" tabindex="0" role="region" aria-labelledby="osebne-reference">
     <table class="experience-table"><thead><tr><th scope="col">Leto</th><th scope="col">Projekt in naloga</th><th scope="col">Vrsta reference</th></tr></thead><tbody>{table}</tbody></table>
    </div>
