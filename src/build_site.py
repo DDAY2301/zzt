@@ -170,7 +170,8 @@ def team():
   ('2026', 'DCYDE!: New Methods of Agro in Croatia', 'Vodenje devetčlanske slovenske skupine in priprava priročnika', 'Izvedba'),
   ('2026', 'DCYDE!: Cookbook from Leftovers', 'Urejanje prispevkov in projektne dokumentacije', 'Izvedba'),
   ('2026', 'DCYDE!: Youth Survival Guide', 'Uredništvo in dokumentiranje priprave gradiva', 'Izvedba'),
-  ('2025', 'VIBE / The Power Within / The Future We Want', 'Sodelovanje na mladinskih usposabljanjih in izmenjavah', 'Udeležba'),
+  ('2025', 'VIBE / The Future We Want', 'Sodelovanje na mladinskih usposabljanjih in izmenjavah', 'Udeležba'),
+  ('2025', 'The Power Within', 'Udeležba na usposabljanju Erasmus+ za mladinske delavce na Malti', 'Udeležba'),
   ('2025', 'MEGAPHONE', 'Udeležba kot predstavnik organizacije Povod', 'Udeležba'),
  ]
  table = ''.join(
